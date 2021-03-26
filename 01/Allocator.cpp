@@ -1,5 +1,4 @@
 #include "Allocator.h"
-#include <cassert>
 
 void Allocator::makeAllocator(size_t maxSize)
 {
@@ -31,5 +30,6 @@ void Allocator::reset()
 }
 Allocator::~Allocator()
 {
-    delete[] buf;
+    
+    if (buf != nullptr) delete[] buf;
 }

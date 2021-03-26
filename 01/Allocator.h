@@ -5,8 +5,8 @@ class Allocator
 {
     private:
         int offset = 0, flag = 0;
-        char *buf;
-        size_t rest_size, whole_size;
+        char *buf = nullptr;
+        size_t rest_size = 0, whole_size = 0;
     
     public:
         void makeAllocator(size_t maxSize);

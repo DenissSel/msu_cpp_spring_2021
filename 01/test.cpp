@@ -1,48 +1,59 @@
 #include <iostream>
 #include "Allocator.h"
 #include "test.h"
+#include <cassert>
 
-
-int allocTest() 
+void allocTest() 
 {
     Allocator a;
     char *b, *c, *d;
     a.makeAllocator(10);
     b = a.alloc(7);
     c = a.alloc(3);
-    if (b == nullptr) return 1;
-    if (c == nullptr) return 1;
+    assert(b != nullptr);
+    assert(c != nullptr);
     d = a.alloc(4);
-    if (d != nullptr) return 1;
-    return 0;
+    assert(d == nullptr);
 }
-int resetTest()
+void resetTest()
 {
     Allocator a;
     char *b, *c, *d;
     a.makeAllocator(10);
     b = a.alloc(7);
     c = a.alloc(3);
-    if (b == nullptr) return 1;
-    if (c == nullptr) return 1;
+    assert(b != nullptr);
+    assert(c != nullptr);
     a.reset();
     d = a.alloc(4);
-    if (d == nullptr) return 1;
-    return 0;
+    assert(d != nullptr);
 }
-
+void doubleMakeAllocTest()
+{
+    Allocator a;
+    char *b, *c, *d;
+    a.makeAllocator(10);
+    b = a.alloc(7);
+    c = a.alloc(3);
+    assert(b != nullptr);
+    assert(c != nullptr);
+    a.makeAllocator(15);
+    d = a.alloc(15);
+    assert(d != nullptr);
+}
+void allocBeforeMakeAllocator()
+{
+    Allocator a;
+    char *b;
+    b = a.alloc(15);
+    assert(b == nullptr);
+}
 int main()
 {
-    if (allocTest() != 0) 
-    {
-        std::cout << "allocTest failed\n";
-        return 1;
-    }
-    if (resetTest() != 0)
-    {
-        std::cout << "resetTest failed\n";
-        return 1;
-    }
+    allocTest();
+    resetTest();
+    doubleMakeAllocTest();
+    allocBeforeMakeAllocator();
     std::cout << "Success\n";
     return 0;
 }

@@ -1,4 +1,6 @@
 #pragma once
 
-int allocTest();
-int resetTest();
+void allocTest();
+void resetTest();
+void doubleMakeAllocTest();
+void allocBeforeMakeAllocator();
