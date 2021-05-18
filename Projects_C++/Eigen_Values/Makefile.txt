@@ -1,0 +1,13 @@
+all: res
+
+res: Main_Eigen.o functions_eigen.o
+	g++ Main_Eigen.o functions_eigen.o -o res 
+	
+Main_Eigen.o: Main_Eigen.cpp
+	g++ -c Main_Eigen.cpp
+
+functions_eigen.o: functions_eigen.cpp
+	g++ -c functions_eigen.cpp
+	
+clean:
+	rm -rf *.o res5
